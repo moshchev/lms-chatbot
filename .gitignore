@@ -37,3 +37,8 @@ next-env.d.ts
 # Cloudflare
 .wrangler/
 .dev.vars
+
+# Wrangler
+.wrangler/logs/
+# Do not ignore the .wrangler directory itself
+!.wrangler/

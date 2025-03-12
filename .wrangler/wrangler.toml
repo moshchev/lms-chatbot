@@ -1,0 +1,16 @@
+[pages]
+# Increase the upload timeout
+upload_timeout = 300
+
+# Configure the build output
+[build]
+command = "npm run build"
+upload.format = "directory"
+
+# Configure the site
+[site]
+bucket = ".next"
+
+# Configure environment variables
+[vars]
+NODE_VERSION = "18.18.0" 

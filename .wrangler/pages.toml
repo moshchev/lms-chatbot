@@ -1,0 +1,3 @@
+# Pages configuration
+pages_build_output_dir = ".next"
+pages_exclude_files = [".next/cache/**/*"] 

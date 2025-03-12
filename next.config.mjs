@@ -21,6 +21,37 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
+  output: 'standalone',
+  webpack: (config, { isServer }) => {
+    config.optimization.splitChunks = {
+      chunks: 'all',
+      maxInitialRequests: 25,
+      maxAsyncRequests: 25,
+      minSize: 20000,
+      maxSize: 20 * 1024 * 1024, // 20 MiB max chunk size
+      cacheGroups: {
+        default: false,
+        vendors: false,
+        commons: {
+          name: 'commons',
+          chunks: 'all',
+          minChunks: 2,
+          reuseExistingChunk: true,
+        },
+        lib: {
+          test: /[\\/]node_modules[\\/]/,
+          name(module) {
+            const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+            return `npm.${packageName.replace('@', '')}`;
+          },
+          chunks: 'all',
+          minChunks: 1,
+          reuseExistingChunk: true,
+        },
+      },
+    };
+    return config;
+  },
 }
 
 mergeConfig(nextConfig, userConfig)
