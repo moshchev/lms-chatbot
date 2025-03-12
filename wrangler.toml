@@ -10,7 +10,7 @@ format = "service-worker"
 
 # Configure environment variables
 [vars]
-NODE_VERSION = "18"
+NODE_VERSION = "18.17.0"
 
 # Configure routes
 [[routes]]
