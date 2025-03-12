@@ -4,7 +4,7 @@ compatibility_flags = ["nodejs_compat"]
 
 # Configure Cloudflare Pages with Next.js
 [build]
-command = "npm run build"
+command = "npm install --legacy-peer-deps && npm run build"
 [build.upload]
 format = "service-worker"
 
