@@ -13,7 +13,9 @@
     "lint": "next lint",
     "pages:dev": "wrangler pages dev .next",
     "pages:deploy": "wrangler pages deploy .next",
-    "deploy": "node deploy.js"
+    "deploy": "node deploy.js",
+    "pages:build": "npx @cloudflare/next-on-pages",
+    "deploy:simple": "npm run clean && next build && npx @cloudflare/next-on-pages && wrangler pages deploy .vercel/output/static --commit-dirty=true --compatibility-flag=nodejs_compat"
   },
   "dependencies": {
     "@ai-sdk/openai": "latest",
@@ -63,6 +65,7 @@
     "react-hook-form": "^7.54.1",
     "react-resizable-panels": "^2.1.7",
     "recharts": "2.15.0",
+    "server-only": "^0.0.1",
     "sonner": "^1.7.1",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",

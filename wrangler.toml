@@ -1,17 +1,16 @@
-
 name = "canvas-lms-chatbot"
 compatibility_date = "2023-06-28"
 compatibility_flags = ["nodejs_compat"]
 
 # Configure Cloudflare Pages with Next.js
 [build]
-command = "npm install --legacy-peer-deps && npm run build"
+command = "npm install --legacy-peer-deps && npm run build && npx @cloudflare/next-on-pages"
 
 [site]
-bucket = ".next"
+bucket = ".vercel/output/static"
 
 # Pages specific configuration
-pages_build_output_dir = ".next"
+pages_build_output_dir = ".vercel/output/static"
 
 # Configure environment variables
 [vars]

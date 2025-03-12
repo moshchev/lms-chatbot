@@ -1,6 +1,9 @@
 import { OpenAI } from 'openai';
 import { NextResponse } from 'next/server';
 
+// Configure this route to use the Edge Runtime
+export const runtime = 'edge';
+
 // Initialize the OpenAI client with the API key from environment variables
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,

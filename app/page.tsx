@@ -5,6 +5,8 @@ import Sidebar from "@/components/sidebar"
 import CourseCard from "@/components/course-card"
 import ToDoList from "@/components/todo-list"
 import RecentFeedback from "@/components/recent-feedback"
+import ChatbotButton from "@/components/chatbot-button"
+import SearchButton from "@/components/search-button"
 import { courses } from "@/lib/data"
 
 export default function Dashboard() {
@@ -35,6 +37,8 @@ export default function Dashboard() {
             <h1 className="text-xl md:text-2xl font-bold">Dashboard</h1>
           </div>
           <div className="flex items-center gap-4">
+            <SearchButton />
+            <ChatbotButton />
             <Button variant="ghost" size="icon">
               <MoreVertical className="h-5 w-5" />
             </Button>

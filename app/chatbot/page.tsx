@@ -8,9 +8,13 @@ import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Send, ArrowLeft } from "lucide-react"
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
 import type { ChatMessageType } from "@/lib/types"
 
 export default function ChatbotPage() {
+  const searchParams = useSearchParams()
+  const initialQuery = searchParams.get('q')
+  
   const [messages, setMessages] = useState<ChatMessageType[]>([
     {
       id: "welcome",
@@ -18,26 +22,36 @@ export default function ChatbotPage() {
       content: "Hello! I'm your Canvas LMS assistant. How can I help you today?",
     },
   ])
-  const [input, setInput] = useState("")
+  const [input, setInput] = useState(initialQuery || "")
   const [isLoading, setIsLoading] = useState(false)
   const [streamingMessage, setStreamingMessage] = useState<string>("")
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const initialQueryProcessed = useRef(false)
 
   // Auto-scroll to bottom when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }, [messages, streamingMessage])
 
-  const handleSendMessage = async (e: React.FormEvent) => {
-    e.preventDefault()
+  // Process initial query from URL if present
+  useEffect(() => {
+    if (initialQuery && !initialQueryProcessed.current) {
+      initialQueryProcessed.current = true
+      handleSendMessage(null, initialQuery)
+    }
+  }, [initialQuery])
 
-    if (!input.trim()) return
+  const handleSendMessage = async (e: React.FormEvent | null, overrideInput?: string) => {
+    if (e) e.preventDefault()
+
+    const messageText = overrideInput || input
+    if (!messageText.trim()) return
 
     // Add user message
     const userMessage: ChatMessageType = {
       id: Date.now().toString(),
       role: "user",
-      content: input,
+      content: messageText,
     }
 
     setMessages((prev) => [...prev, userMessage])
@@ -55,7 +69,7 @@ export default function ChatbotPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompt: input }),
+        body: JSON.stringify({ prompt: messageText }),
       });
 
       if (!response.ok) {
