@@ -9,4 +9,4 @@ output_directory = ".next"
 
 # Configure environment variables
 [vars]
-NODE_VERSION = "18.17.0" 
+NODE_VERSION = "18.18.0" 
