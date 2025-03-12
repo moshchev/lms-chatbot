@@ -1,0 +1,18 @@
+name = "canvas-lms-chatbot"
+compatibility_date = "2023-06-28"
+compatibility_flags = ["nodejs_compat"]
+
+# Configure Cloudflare Pages with Next.js
+[build]
+command = "npm run build"
+[build.upload]
+format = "service-worker"
+
+# Configure environment variables
+[vars]
+NODE_VERSION = "18"
+
+# Configure routes
+[[routes]]
+pattern = "/*"
+script = "index.js" 
