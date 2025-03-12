@@ -5,14 +5,7 @@ compatibility_flags = ["nodejs_compat"]
 # Configure Cloudflare Pages with Next.js
 [build]
 command = "npm install --legacy-peer-deps && npm run build"
-[build.upload]
-format = "service-worker"
 
 # Configure environment variables
 [vars]
-NODE_VERSION = "18.17.0"
-
-# Configure routes
-[[routes]]
-pattern = "/*"
-script = "index.js" 
+NODE_VERSION = "18.17.0" 
