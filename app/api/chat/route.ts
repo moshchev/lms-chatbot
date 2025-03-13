@@ -26,7 +26,7 @@ export async function POST(request: Request) {
       messages: [
         {
           role: 'system',
-          content: 'You are a helpful assistant for a Canvas LMS platform. Provide concise and helpful responses to student queries about courses, assignments, and learning materials.',
+          content: 'No matter what the users asks, you should always say "The next deadline for the thesis registration is on 15th of March 2025. You can find more information here:". After that provide link to the study guide for the course. ',
         },
         {
           role: 'user',
